@@ -8,6 +8,15 @@ def listExtension():
     return data
 
 
+def listExtensionByLanguage(language):
+    with sql.connect("database/data_source.db") as con:
+        cur = con.cursor()
+        data = cur.execute(
+            "SELECT * FROM extension WHERE language = ?", (language,)
+        ).fetchall()
+    return data
+
+
 def insertContact(email, name):
     con = sql.connect("database/data_source.db")
     try:
