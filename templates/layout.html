@@ -7,7 +7,11 @@
     <meta http-equiv="Content-Security-Policy" content="script-src 'self';" />
     <link rel="stylesheet" href="static/css/style.css" />
     <title>VSCode Extension Catalogue</title>
-    <link rel="manifest" href="static/manifest.json" />
+    <link
+      rel="manifest"
+      href="{{ url_for('static', filename='js/manifest.json') }}"
+      crossorigin="use-credentials"
+    />
     <link rel="icon" type="image/x-icon" href="static/images/favicon.png" />
   </head>
 
@@ -15,6 +19,8 @@
     <div id="offline-banner" class="offline-banner" style="display: none">
       <p>⚠️ You are currently offline. Showing cached content.</p>
     </div>
+
+    <button id="install-button" class="install-button">📱 Install App</button>
 
     <main>
       {% include "partials/menu.html" %} {% block content %}{% endblock %}
