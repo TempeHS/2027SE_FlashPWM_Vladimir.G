@@ -2,10 +2,9 @@ import sqlite3 as sql
 
 
 def listExtension():
-    con = sql.connect("database/data_source.db")
-    cur = con.cursor()
-    data = cur.execute("SELECT * FROM extension").fetchall()
-    con.close()
+    with sql.connect("database/data_source.db") as con:
+        cur = con.cursor()
+        data = cur.execute("SELECT * FROM extension").fetchall()
     return data
 
 
@@ -23,11 +22,8 @@ def insertContact(email, name):
 
 def deleteContact(email):
 
-    con = sql.connect("database/data_source.db")
-    cur = con.cursor()
-
-    # Using parameterised query to prevent SQL injection
-    cur.execute("DELETE FROM contact_list WHERE email = ?", (email,))
-
-    con.commit()
-    con.close()
+    with sql.connect("database/data_source.db") as con:
+        cur = con.cursor()
+        # Using parameterised query to prevent SQL injection
+        cur.execute("DELETE FROM contact_list WHERE email = ?", (email,))
+        con.commit()
